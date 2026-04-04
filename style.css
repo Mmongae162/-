@@ -147,3 +147,44 @@ h1, h2 {
   color: #cbd5e1;
   font-size: 16px;
 }
+.play-area {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.play-box {
+  width: 220px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.play-box h3 {
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+.play-count {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #dbeafe;
+}
+
+.answer-group {
+  margin-bottom: 20px;
+}
+
+.selected-answer {
+  outline: 3px solid #facc15;
+  transform: translateY(-2px);
+}
+
+.disabled-button {
+  background: #94a3b8 !important;
+  color: #e2e8f0 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
