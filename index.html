@@ -77,20 +77,39 @@
       </div>
     </section>
 
-    <!-- 임시 문제 화면 -->
-    <section id="screen-question" class="screen">
-      <div class="card">
-        <h2 id="question-teacher-name">OOO 선생님 문제</h2>
-        <p class="description">
-          여기는 다음 단계에서 음성 듣기 버튼과 정답 선택 버튼이 들어갈 자리입니다.
-        </p>
+   <!-- 문제 화면 -->
+<section id="screen-question" class="screen">
+  <div class="card">
+    <h2 id="question-teacher-name">OOO 선생님 문제</h2>
+    <p class="description">
+      두 음성 중 AI가 만든 목소리를 찾아보세요.
+    </p>
 
-<div class="button-group">
-  <button id="next-question-button" class="main-button">다음 문제(임시)</button>
-  <button id="back-to-teacher-intro" class="sub-button">돌아가기</button>
-</div>
+    <div class="play-area">
+      <div class="play-box">
+        <h3>1번 음성</h3>
+        <button id="play-audio-1" class="main-button">1번 음성 듣기</button>
+        <p id="play-count-1" class="play-count">남은 재생: 2회</p>
       </div>
-    </section>
+
+      <div class="play-box">
+        <h3>2번 음성</h3>
+        <button id="play-audio-2" class="main-button">2번 음성 듣기</button>
+        <p id="play-count-2" class="play-count">남은 재생: 2회</p>
+      </div>
+    </div>
+
+    <div class="button-group answer-group">
+      <button id="answer-1-button" class="sub-button">AI는 1번</button>
+      <button id="answer-2-button" class="sub-button">AI는 2번</button>
+    </div>
+
+    <div class="button-group">
+      <button id="next-question-button" class="main-button">다음 문제(임시)</button>
+      <button id="back-to-teacher-intro" class="sub-button">돌아가기</button>
+    </div>
+  </div>
+</section>
     <!-- 임시 결과 화면 -->
     <section id="screen-end" class="screen">
       <div class="card">
