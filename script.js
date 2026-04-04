@@ -56,7 +56,9 @@ const resultMessage = document.getElementById("result-message");
 const feedbackCard = document.getElementById("feedback-card");
 const feedbackText = document.getElementById("feedback-text");
 const confettiContainer = document.getElementById("confetti-container");
-
+const rainContainer = document.getElementById("rain-container");
+const correctSound = document.getElementById("correct-sound");
+const wrongSound = document.getElementById("wrong-sound");
 function showScreen(screenId) {
   const allScreens = document.querySelectorAll(".screen");
   allScreens.forEach((screen) => {
@@ -173,10 +175,42 @@ function launchConfetti() {
     confettiContainer.appendChild(piece);
   }
 }
+function launchRain() {
+  rainContainer.innerHTML = "";
 
+  for (let i = 0; i < 40; i++) {
+    const drop = document.createElement("div");
+    drop.classList.add("raindrop");
+
+    drop.style.left = `${Math.random() * 100}%`;
+    drop.style.animationDelay = `${Math.random() * 0.5}s`;
+
+    rainContainer.appendChild(drop);
+  }
+}
+function playFeedbackSound(isCorrect) {
+  if (correctSound) {
+    correctSound.pause();
+    correctSound.currentTime = 0;
+  }
+
+  if (wrongSound) {
+    wrongSound.pause();
+    wrongSound.currentTime = 0;
+  }
+
+  if (isCorrect && correctSound) {
+    correctSound.play().catch(() => {});
+  }
+
+  if (!isCorrect && wrongSound) {
+    wrongSound.play().catch(() => {});
+  }
+}
 function showFeedback(isCorrect) {
   feedbackCard.classList.remove("feedback-correct", "feedback-wrong");
   confettiContainer.innerHTML = "";
+  rainContainer.innerHTML = "";
 
   if (isCorrect) {
     feedbackCard.classList.add("feedback-correct");
@@ -185,8 +219,10 @@ function showFeedback(isCorrect) {
   } else {
     feedbackCard.classList.add("feedback-wrong");
     feedbackText.textContent = "땡!";
+    launchRain();
   }
 
+  playFeedbackSound(isCorrect);
   showScreen("screen-feedback");
 }
 
