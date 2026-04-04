@@ -16,7 +16,18 @@ const answerKey = {
   "송현정": 1,
   "강경욱": 2
 };
-
+const audioFileMap = {
+  "노승표": ["noseungpyoa1.mp3", "noseungpyoa2.mp3"],
+  "김택현": ["", ""],
+  "고미진": ["gomijina1.mp3", "gomijina2.mp3"],
+  "교장": ["principala1.mp3", "principala2.mp3"],
+  "최지원": ["choijiwona1.mp3", "choijiwona2.mp3"],
+  "봉영미": ["bongyoungmia1.mp3", "bongyoungmia2.mp3"],
+  "경상현": ["gyeongsanghyeona1.mp3", "gyeongsanghyeona2.mp3"],
+  "오지현": ["ohjihyeona1.mp3", "ohjihyeona2.mp3"],
+  "송현정": ["songhyeonjeonga1.mp3", "songhyeonjeonga2.mp3"],
+  "강경욱": ["kanggyeonguka1.mp3", "kanggyeonguka2.mp3"]
+};
 let selectedGrade = null;
 let currentTeacherIndex = 0;
 let score = 0;
@@ -25,7 +36,8 @@ let playCount1 = 0;
 let playCount2 = 0;
 let selectedAnswer = null;
 let isCheckingAnswer = false;
-
+let currentAudio1 = null;
+let currentAudio2 = null;
 const toStartScreenButton = document.getElementById("to-start-screen");
 const backToIntroButton = document.getElementById("back-to-intro");
 const startQuizButton = document.getElementById("start-quiz-button");
@@ -80,13 +92,42 @@ function updateTeacherIntroScreen() {
   teacherIntroTitle.textContent = `이번 히든 싱어의 주인공은 ${currentTeacher} 선생님입니다.`;
   questionTeacherName.textContent = `${currentTeacher} 선생님 문제`;
 }
+function loadCurrentTeacherAudio() {
+  const currentTeacher = getCurrentTeacher();
+  const fileNames = audioFileMap[currentTeacher];
 
+  currentAudio1 = null;
+  currentAudio2 = null;
+
+  if (!fileNames) return;
+
+  if (fileNames[0]) {
+    currentAudio1 = new Audio(`/-/sounds/${fileNames[0]}`);
+  }
+
+  if (fileNames[1]) {
+    currentAudio2 = new Audio(`/-/sounds/${fileNames[1]}`);
+  }
+}
+
+function stopCurrentAudio() {
+  if (currentAudio1) {
+    currentAudio1.pause();
+    currentAudio1.currentTime = 0;
+  }
+
+  if (currentAudio2) {
+    currentAudio2.pause();
+    currentAudio2.currentTime = 0;
+  }
+}
 function resetQuestionState() {
   playCount1 = 0;
   playCount2 = 0;
   selectedAnswer = null;
   isCheckingAnswer = false;
-
+  stopCurrentAudio();
+  loadCurrentTeacherAudio();
   playAudio1Button.disabled = false;
   playAudio2Button.disabled = false;
   checkAnswerButton.disabled = false;
@@ -123,27 +164,56 @@ function updatePlayButtons() {
 function playAudio(number) {
   if (isCheckingAnswer) return;
 
+  const currentTeacher = getCurrentTeacher();
+
   if (number === 1) {
+    if (!currentAudio1) {
+      alert(`${currentTeacher} 선생님의 1번 음성 파일이 아직 없습니다.`);
+      return;
+    }
+
     if (playCount1 >= 2) {
       alert("1번 음성은 재생 한도에 도달했습니다.");
       return;
     }
+
+    if (currentAudio2) {
+      currentAudio2.pause();
+      currentAudio2.currentTime = 0;
+    }
+
     playCount1 += 1;
-    alert("1번 음성 재생 (임시 테스트)");
+    currentAudio1.currentTime = 0;
+    currentAudio1.play().catch(() => {
+      alert("1번 음성 재생에 실패했습니다.");
+    });
   }
 
   if (number === 2) {
+    if (!currentAudio2) {
+      alert(`${currentTeacher} 선생님의 2번 음성 파일이 아직 없습니다.`);
+      return;
+    }
+
     if (playCount2 >= 2) {
       alert("2번 음성은 재생 한도에 도달했습니다.");
       return;
     }
+
+    if (currentAudio1) {
+      currentAudio1.pause();
+      currentAudio1.currentTime = 0;
+    }
+
     playCount2 += 1;
-    alert("2번 음성 재생 (임시 테스트)");
+    currentAudio2.currentTime = 0;
+    currentAudio2.play().catch(() => {
+      alert("2번 음성 재생에 실패했습니다.");
+    });
   }
 
   updatePlayButtons();
 }
-
 function selectAnswer(answerNumber) {
   if (isCheckingAnswer) return;
 
