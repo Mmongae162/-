@@ -58,6 +58,7 @@ h1, h2 {
   margin-bottom: 30px;
 }
 
+/* 버튼 공통 */
 .button-group {
   display: flex;
   justify-content: center;
@@ -94,30 +95,13 @@ h1, h2 {
   transform: translateY(-2px);
 }
 
-@media (max-width: 600px) {
-  .card {
-    padding: 30px 18px;
-  }
-
-  .corner-info {
-    position: static;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  h1, h2 {
-    margin-top: 0;
-  }
-
-  .description {
-    font-size: 16px;
-  }
-}
+/* 세로 버튼 */
 .vertical-group {
   flex-direction: column;
   align-items: center;
 }
 
+/* 실루엣 자리 */
 .silhouette-placeholder {
   width: 220px;
   height: 220px;
@@ -130,23 +114,8 @@ h1, h2 {
   color: #cbd5e1;
   font-size: 16px;
 }
-.vertical-group {
-  flex-direction: column;
-  align-items: center;
-}
 
-.silhouette-placeholder {
-  width: 220px;
-  height: 220px;
-  margin: 0 auto 24px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.12);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #cbd5e1;
-  font-size: 16px;
-}
+/* 🎧 음성 영역 */
 .play-area {
   display: flex;
   gap: 16px;
@@ -173,6 +142,7 @@ h1, h2 {
   color: #dbeafe;
 }
 
+/* 답 선택 */
 .answer-group {
   margin-bottom: 20px;
 }
@@ -182,9 +152,35 @@ h1, h2 {
   transform: translateY(-2px);
 }
 
+/* 비활성 버튼 */
 .disabled-button {
   background: #94a3b8 !important;
   color: #e2e8f0 !important;
   cursor: not-allowed !important;
   transform: none !important;
+}
+
+/* 모바일 대응 */
+@media (max-width: 600px) {
+  .card {
+    padding: 30px 18px;
+  }
+
+  .corner-info {
+    position: static;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  h1, h2 {
+    margin-top: 0;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+
+  .play-box {
+    width: 100%;
+  }
 }
