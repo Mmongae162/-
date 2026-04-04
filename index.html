@@ -72,9 +72,9 @@
   <div id="screen3" class="box hidden">
     <h1>학년 선택</h1>
 
-    <button>1학년</button><br>
-    <button>2학년</button><br>
-    <button>3학년</button>
+<button onclick="startQuiz(1)">1학년</button><br>
+<button onclick="startQuiz(2)">2학년</button><br>
+<button onclick="startQuiz(3)">3학년</button>
   </div>
 
   <script>
@@ -92,7 +92,32 @@
       document.getElementById("screen2").classList.add("hidden");
       document.getElementById("screen1").classList.remove("hidden");
     }
-  </script>
+    let currentGrade = 1;
 
+function startQuiz(grade) {
+  currentGrade = grade;
+
+  document.getElementById("screen3").classList.add("hidden");
+  document.getElementById("screen4").classList.remove("hidden");
+
+  let teacherName = "";
+
+  if (grade === 1) teacherName = "노승표";
+  if (grade === 2) teacherName = "최지원";
+  if (grade === 3) teacherName = "오지현";
+
+  document.getElementById("teacherText").innerText =
+    "이번 히든 싱어 주인공은 '" + teacherName + " 선생님'";
+}
+
+function goToQuestion() {
+  alert("다음 단계에서 문제 화면 만들 예정!");
+}
+  </script>
+<div id="screen4" class="box hidden">
+  <h1 id="teacherText"></h1>
+  <p>이번 히든 싱어의 주인공입니다</p>
+  <button onclick="goToQuestion()">다음</button>
+</div>
 </body>
 </html>
