@@ -7,6 +7,10 @@ const teachersByGrade = {
 let selectedGrade = null;
 let currentTeacherIndex = 0;
 
+let playCount1 = 0;
+let playCount2 = 0;
+let selectedAnswer = null;
+
 const toStartScreenButton = document.getElementById("to-start-screen");
 const backToIntroButton = document.getElementById("back-to-intro");
 const startQuizButton = document.getElementById("start-quiz-button");
@@ -18,6 +22,14 @@ const backToTeacherIntroButton = document.getElementById("back-to-teacher-intro"
 
 const restartButton = document.getElementById("restart-button");
 const nextQuestionButton = document.getElementById("next-question-button");
+
+const playAudio1Button = document.getElementById("play-audio-1");
+const playAudio2Button = document.getElementById("play-audio-2");
+const playCount1Text = document.getElementById("play-count-1");
+const playCount2Text = document.getElementById("play-count-2");
+
+const answer1Button = document.getElementById("answer-1-button");
+const answer2Button = document.getElementById("answer-2-button");
 
 const gradeButtons = document.querySelectorAll(".grade-button");
 
@@ -40,6 +52,81 @@ function updateTeacherIntroScreen() {
   questionTeacherName.textContent = `${currentTeacher} 선생님 문제`;
 }
 
+function resetQuestionState() {
+  playCount1 = 0;
+  playCount2 = 0;
+  selectedAnswer = null;
+
+  playAudio1Button.disabled = false;
+  playAudio2Button.disabled = false;
+
+  playAudio1Button.classList.remove("disabled-button");
+  playAudio2Button.classList.remove("disabled-button");
+
+  answer1Button.classList.remove("selected-answer");
+  answer2Button.classList.remove("selected-answer");
+
+  playCount1Text.textContent = "남은 재생: 2회";
+  playCount2Text.textContent = "남은 재생: 2회";
+}
+
+function updatePlayButtons() {
+  const remaining1 = 2 - playCount1;
+  const remaining2 = 2 - playCount2;
+
+  playCount1Text.textContent = `남은 재생: ${remaining1}회`;
+  playCount2Text.textContent = `남은 재생: ${remaining2}회`;
+
+  if (playCount1 >= 2) {
+    playAudio1Button.disabled = true;
+    playAudio1Button.classList.add("disabled-button");
+  }
+
+  if (playCount2 >= 2) {
+    playAudio2Button.disabled = true;
+    playAudio2Button.classList.add("disabled-button");
+  }
+}
+
+function playAudio(number) {
+  if (number === 1) {
+    if (playCount1 >= 2) {
+      alert("1번 음성은 재생 한도에 도달했습니다.");
+      return;
+    }
+
+    playCount1 += 1;
+    alert("1번 음성 재생 (임시 테스트)");
+  }
+
+  if (number === 2) {
+    if (playCount2 >= 2) {
+      alert("2번 음성은 재생 한도에 도달했습니다.");
+      return;
+    }
+
+    playCount2 += 1;
+    alert("2번 음성 재생 (임시 테스트)");
+  }
+
+  updatePlayButtons();
+}
+
+function selectAnswer(answerNumber) {
+  selectedAnswer = answerNumber;
+
+  answer1Button.classList.remove("selected-answer");
+  answer2Button.classList.remove("selected-answer");
+
+  if (answerNumber === 1) {
+    answer1Button.classList.add("selected-answer");
+  }
+
+  if (answerNumber === 2) {
+    answer2Button.classList.add("selected-answer");
+  }
+}
+
 function goToNextTeacher() {
   currentTeacherIndex++;
 
@@ -51,6 +138,7 @@ function goToNextTeacher() {
   }
 
   updateTeacherIntroScreen();
+  resetQuestionState();
   showScreen("screen-teacher-intro");
 }
 
@@ -75,6 +163,7 @@ gradeButtons.forEach((button) => {
     selectedGrade = button.dataset.grade;
     currentTeacherIndex = 0;
     updateTeacherIntroScreen();
+    resetQuestionState();
     showScreen("screen-teacher-intro");
   });
 });
@@ -84,11 +173,28 @@ backToGradeButton.addEventListener("click", () => {
 });
 
 toQuestionScreenButton.addEventListener("click", () => {
+  resetQuestionState();
   showScreen("screen-question");
 });
 
 backToTeacherIntroButton.addEventListener("click", () => {
   showScreen("screen-teacher-intro");
+});
+
+playAudio1Button.addEventListener("click", () => {
+  playAudio(1);
+});
+
+playAudio2Button.addEventListener("click", () => {
+  playAudio(2);
+});
+
+answer1Button.addEventListener("click", () => {
+  selectAnswer(1);
+});
+
+answer2Button.addEventListener("click", () => {
+  selectAnswer(2);
 });
 
 nextQuestionButton.addEventListener("click", () => {
@@ -98,5 +204,6 @@ nextQuestionButton.addEventListener("click", () => {
 restartButton.addEventListener("click", () => {
   selectedGrade = null;
   currentTeacherIndex = 0;
+  resetQuestionState();
   showScreen("screen-intro");
 });
