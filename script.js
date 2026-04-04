@@ -16,6 +16,18 @@ const answerKey = {
   "송현정": 1,
   "강경옥": 2
 };
+const silhouetteImageMap = {
+  "노승표": "images/noseungpyo.png",
+  "김택현": "images/kimtaekhyeon.png",
+  "고미진": "images/gomijin.png",
+  "교장": "images/principal.png",
+  "최지원": "images/choijiwon.png",
+  "봉영미": "images/bongyoungmi.png",
+  "경상현": "images/gyeongsanghyeon.png",
+  "오지현": "images/ohjihyeon.png",
+  "송현정": "images/songhyeonjeong.png",
+  "강경욱": "images/kanggyeonguk.png"
+};
 const audioFileMap = {
   "노승표": ["noseungpyoa1.mp3", "noseungpyoa2.mp3"],
   "김택현": ["", ""],
@@ -61,6 +73,7 @@ const answer2Button = document.getElementById("answer-2-button");
 const gradeButtons = document.querySelectorAll(".grade-button");
 
 const teacherIntroTitle = document.getElementById("teacher-intro-title");
+const teacherSilhouette = document.getElementById("teacher-silhouette");
 const questionTeacherName = document.getElementById("question-teacher-name");
 const scoreText = document.getElementById("score-text");
 const resultMessage = document.getElementById("result-message");
@@ -91,6 +104,8 @@ function updateTeacherIntroScreen() {
   const currentTeacher = getCurrentTeacher();
   teacherIntroTitle.textContent = `이번 히든 싱어의 주인공은 ${currentTeacher} 선생님입니다.`;
   questionTeacherName.textContent = `${currentTeacher} 선생님 문제`;
+  if (teacherSilhouette && silhouetteImageMap[currentTeacher]) {
+  teacherSilhouette.src = silhouetteImageMap[currentTeacher];
 }
 function loadCurrentTeacherAudio() {
   const currentTeacher = getCurrentTeacher();
