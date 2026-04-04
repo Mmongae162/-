@@ -1,7 +1,7 @@
 const teachersByGrade = {
   1: ["노승표", "김택현", "고미진", "교장"],
   2: ["최지원", "봉영미", "고미진", "경상현", "교장"],
-  3: ["오지현", "송현정", "고미진", "강경옥", "교장"]
+  3: ["오지현", "송현정", "고미진", "강경욱", "교장"]
 };
 
 const answerKey = {
@@ -14,8 +14,9 @@ const answerKey = {
   "경상현": 1,
   "오지현": 2,
   "송현정": 1,
-  "강경옥": 2
+  "강경욱": 2
 };
+
 const silhouetteImageMap = {
   "노승표": "images/noseungpyo.png",
   "김택현": "images/kimtaekhyeon.png",
@@ -28,6 +29,7 @@ const silhouetteImageMap = {
   "송현정": "images/songhyeonjeong.png",
   "강경욱": "images/kanggyeonguk.png"
 };
+
 const audioFileMap = {
   "노승표": ["noseungpyoa1.mp3", "noseungpyoa2.mp3"],
   "김택현": ["", ""],
@@ -38,8 +40,9 @@ const audioFileMap = {
   "경상현": ["gyeongsanghyeona1.mp3", "gyeongsanghyeona2.mp3"],
   "오지현": ["ohjihyeona1.mp3", "ohjihyeona2.mp3"],
   "송현정": ["songhyeonjeonga1.mp3", "songhyeonjeonga2.mp3"],
-  "강경옥": ["kanggyeonguka1.mp3", "kanggyeonguka2.mp3"]
+  "강경욱": ["kanggyeonguka1.mp3", "kanggyeonguka2.mp3"]
 };
+
 let selectedGrade = null;
 let currentTeacherIndex = 0;
 let score = 0;
@@ -50,6 +53,7 @@ let selectedAnswer = null;
 let isCheckingAnswer = false;
 let currentAudio1 = null;
 let currentAudio2 = null;
+
 const toStartScreenButton = document.getElementById("to-start-screen");
 const backToIntroButton = document.getElementById("back-to-intro");
 const startQuizButton = document.getElementById("start-quiz-button");
@@ -84,6 +88,7 @@ const confettiContainer = document.getElementById("confetti-container");
 const rainContainer = document.getElementById("rain-container");
 const correctSound = document.getElementById("correct-sound");
 const wrongSound = document.getElementById("wrong-sound");
+
 function showScreen(screenId) {
   const allScreens = document.querySelectorAll(".screen");
   allScreens.forEach((screen) => {
@@ -104,9 +109,12 @@ function updateTeacherIntroScreen() {
   const currentTeacher = getCurrentTeacher();
   teacherIntroTitle.textContent = `이번 히든 싱어의 주인공은 ${currentTeacher} 선생님입니다.`;
   questionTeacherName.textContent = `${currentTeacher} 선생님 문제`;
+
   if (teacherSilhouette && silhouetteImageMap[currentTeacher]) {
-  teacherSilhouette.src = silhouetteImageMap[currentTeacher];
+    teacherSilhouette.src = silhouetteImageMap[currentTeacher];
+  }
 }
+
 function loadCurrentTeacherAudio() {
   const currentTeacher = getCurrentTeacher();
   const fileNames = audioFileMap[currentTeacher];
@@ -136,13 +144,16 @@ function stopCurrentAudio() {
     currentAudio2.currentTime = 0;
   }
 }
+
 function resetQuestionState() {
   playCount1 = 0;
   playCount2 = 0;
   selectedAnswer = null;
   isCheckingAnswer = false;
+
   stopCurrentAudio();
   loadCurrentTeacherAudio();
+
   playAudio1Button.disabled = false;
   playAudio2Button.disabled = false;
   checkAnswerButton.disabled = false;
@@ -229,6 +240,7 @@ function playAudio(number) {
 
   updatePlayButtons();
 }
+
 function selectAnswer(answerNumber) {
   if (isCheckingAnswer) return;
 
@@ -260,6 +272,7 @@ function launchConfetti() {
     confettiContainer.appendChild(piece);
   }
 }
+
 function launchRain() {
   rainContainer.innerHTML = "";
 
@@ -273,6 +286,7 @@ function launchRain() {
     rainContainer.appendChild(drop);
   }
 }
+
 function playFeedbackSound(isCorrect) {
   if (correctSound) {
     correctSound.pause();
@@ -292,6 +306,7 @@ function playFeedbackSound(isCorrect) {
     wrongSound.play().catch(() => {});
   }
 }
+
 function showFeedback(isCorrect) {
   feedbackCard.classList.remove("feedback-correct", "feedback-wrong");
   confettiContainer.innerHTML = "";
@@ -318,11 +333,12 @@ function showResult() {
   scoreText.textContent = `점수: ${score} / ${total}`;
 
   if (score === total) {
-  resultMessage.textContent = "👑 완벽! 인간 vs AI 구분 끝판왕!";
-} else if (score >= Math.ceil(total / 2)) {
-  resultMessage.textContent = "🔥 성공! 꽤 날카로운 귀를 가졌네요!";
-} else {
-  resultMessage.textContent = "😢 아직은 어렵다… 다시 도전!";
+    resultMessage.textContent = "👑 완벽! 인간 vs AI 구분 끝판왕!";
+  } else if (score >= Math.ceil(total / 2)) {
+    resultMessage.textContent = "🔥 성공! 꽤 날카로운 귀를 가졌네요!";
+  } else {
+    resultMessage.textContent = "😢 아직은 어렵다… 다시 도전!";
+  }
 }
 
 function goToNextTeacher() {
