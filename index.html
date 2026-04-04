@@ -2,8 +2,9 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI 음성 판별 퀴즈</title>
+
   <style>
     body {
       margin: 0;
@@ -25,15 +26,6 @@
       width: 90%;
     }
 
-    h1 {
-      margin-bottom: 20px;
-    }
-
-    p {
-      line-height: 1.6;
-      color: #d1d5db;
-    }
-
     button {
       margin-top: 20px;
       padding: 12px 24px;
@@ -48,16 +40,59 @@
     button:hover {
       background: #1d4ed8;
     }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
+
 <body>
-  <div class="box">
+
+  <!-- 1️⃣ 첫 화면 -->
+  <div id="screen1" class="box">
     <h1>AI 음성 판별 퀴즈</h1>
     <p>
       TTS 기술을 이용하여 AI와 사람의 목소리를 판별하는 퀴즈입니다.
-      아래 버튼을 눌러 시작해보세요.
     </p>
-    <button>다음</button>
+    <button onclick="goToScreen2()">다음</button>
   </div>
+
+  <!-- 2️⃣ 시작 화면 -->
+  <div id="screen2" class="box hidden">
+    <h1>퀴즈 시작</h1>
+    <p>AI 판별 퀴즈를 시작하시겠습니까?</p>
+
+    <button onclick="goToScreen3()">시작하기</button>
+    <br>
+    <button onclick="goBack()">돌아가기</button>
+  </div>
+
+  <!-- 3️⃣ 학년 선택 -->
+  <div id="screen3" class="box hidden">
+    <h1>학년 선택</h1>
+
+    <button>1학년</button><br>
+    <button>2학년</button><br>
+    <button>3학년</button>
+  </div>
+
+  <script>
+    function goToScreen2() {
+      document.getElementById("screen1").classList.add("hidden");
+      document.getElementById("screen2").classList.remove("hidden");
+    }
+
+    function goToScreen3() {
+      document.getElementById("screen2").classList.add("hidden");
+      document.getElementById("screen3").classList.remove("hidden");
+    }
+
+    function goBack() {
+      document.getElementById("screen2").classList.add("hidden");
+      document.getElementById("screen1").classList.remove("hidden");
+    }
+  </script>
+
 </body>
 </html>
