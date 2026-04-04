@@ -102,11 +102,11 @@ function loadCurrentTeacherAudio() {
   if (!fileNames) return;
 
   if (fileNames[0]) {
-    currentAudio1 = new Audio(`/-/sounds/${fileNames[0]}`);
+    currentAudio1 = new Audio(`sounds/${fileNames[0]}`);
   }
 
   if (fileNames[1]) {
-    currentAudio2 = new Audio(`/-/sounds/${fileNames[1]}`);
+    currentAudio2 = new Audio(`sounds/${fileNames[1]}`);
   }
 }
 
