@@ -1,1 +1,115 @@
+* {
+  box-sizing: border-box;
+}
 
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+  min-height: 100vh;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.screen {
+  display: none;
+  min-height: 100vh;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.screen.active {
+  display: flex;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 40px 24px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.corner-info {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: right;
+  color: #dbeafe;
+}
+
+h1, h2 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.main-button,
+.sub-button {
+  border: none;
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.main-button {
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: bold;
+}
+
+.main-button:hover {
+  transform: translateY(-2px);
+}
+
+.sub-button {
+  background: #cbd5e1;
+  color: #0f172a;
+}
+
+.sub-button:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 30px 18px;
+  }
+
+  .corner-info {
+    position: static;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  h1, h2 {
+    margin-top: 0;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+}
