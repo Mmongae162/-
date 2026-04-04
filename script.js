@@ -4,12 +4,27 @@ const teachersByGrade = {
   3: ["오지현", "송현정", "고미진", "강경욱", "교장"]
 };
 
+const answerKey = {
+  "노승표": 1,
+  "김택현": 2,
+  "고미진": 1,
+  "교장": 2,
+  "최지원": 1,
+  "봉영미": 2,
+  "경상현": 1,
+  "오지현": 2,
+  "송현정": 1,
+  "강경욱": 2
+};
+
 let selectedGrade = null;
 let currentTeacherIndex = 0;
+let score = 0;
 
 let playCount1 = 0;
 let playCount2 = 0;
 let selectedAnswer = null;
+let isCheckingAnswer = false;
 
 const toStartScreenButton = document.getElementById("to-start-screen");
 const backToIntroButton = document.getElementById("back-to-intro");
@@ -21,7 +36,7 @@ const toQuestionScreenButton = document.getElementById("to-question-screen");
 const backToTeacherIntroButton = document.getElementById("back-to-teacher-intro");
 
 const restartButton = document.getElementById("restart-button");
-const nextQuestionButton = document.getElementById("next-question-button");
+const checkAnswerButton = document.getElementById("check-answer-button");
 
 const playAudio1Button = document.getElementById("play-audio-1");
 const playAudio2Button = document.getElementById("play-audio-2");
@@ -46,8 +61,12 @@ function showScreen(screenId) {
   document.getElementById(screenId).classList.add("active");
 }
 
+function getCurrentTeacher() {
+  return teachersByGrade[selectedGrade][currentTeacherIndex];
+}
+
 function updateTeacherIntroScreen() {
-  const currentTeacher = teachersByGrade[selectedGrade][currentTeacherIndex];
+  const currentTeacher = getCurrentTeacher();
   teacherIntroTitle.textContent = `이번 히든 싱어의 주인공은 ${currentTeacher} 선생님입니다.`;
   questionTeacherName.textContent = `${currentTeacher} 선생님 문제`;
 }
@@ -56,12 +75,15 @@ function resetQuestionState() {
   playCount1 = 0;
   playCount2 = 0;
   selectedAnswer = null;
+  isCheckingAnswer = false;
 
   playAudio1Button.disabled = false;
   playAudio2Button.disabled = false;
+  checkAnswerButton.disabled = false;
 
   playAudio1Button.classList.remove("disabled-button");
   playAudio2Button.classList.remove("disabled-button");
+  checkAnswerButton.classList.remove("disabled-button");
 
   answer1Button.classList.remove("selected-answer");
   answer2Button.classList.remove("selected-answer");
@@ -89,6 +111,10 @@ function updatePlayButtons() {
 }
 
 function playAudio(number) {
+  if (isCheckingAnswer) {
+    return;
+  }
+
   if (number === 1) {
     if (playCount1 >= 2) {
       alert("1번 음성은 재생 한도에 도달했습니다.");
@@ -113,6 +139,10 @@ function playAudio(number) {
 }
 
 function selectAnswer(answerNumber) {
+  if (isCheckingAnswer) {
+    return;
+  }
+
   selectedAnswer = answerNumber;
 
   answer1Button.classList.remove("selected-answer");
@@ -142,6 +172,36 @@ function goToNextTeacher() {
   showScreen("screen-teacher-intro");
 }
 
+function checkAnswer() {
+  if (isCheckingAnswer) {
+    return;
+  }
+
+  if (selectedAnswer === null) {
+    alert("먼저 답을 선택해 주세요.");
+    return;
+  }
+
+  isCheckingAnswer = true;
+
+  const currentTeacher = getCurrentTeacher();
+  const correctAnswer = answerKey[currentTeacher];
+
+  checkAnswerButton.disabled = true;
+  checkAnswerButton.classList.add("disabled-button");
+
+  if (selectedAnswer === correctAnswer) {
+    score += 1;
+    alert("정답입니다!");
+  } else {
+    alert("땡!");
+  }
+
+  setTimeout(() => {
+    goToNextTeacher();
+  }, 3000);
+}
+
 toStartScreenButton.addEventListener("click", () => {
   showScreen("screen-start");
 });
@@ -151,6 +211,7 @@ backToIntroButton.addEventListener("click", () => {
 });
 
 startQuizButton.addEventListener("click", () => {
+  score = 0;
   showScreen("screen-grade");
 });
 
@@ -197,13 +258,14 @@ answer2Button.addEventListener("click", () => {
   selectAnswer(2);
 });
 
-nextQuestionButton.addEventListener("click", () => {
-  goToNextTeacher();
+checkAnswerButton.addEventListener("click", () => {
+  checkAnswer();
 });
 
 restartButton.addEventListener("click", () => {
   selectedGrade = null;
   currentTeacherIndex = 0;
+  score = 0;
   resetQuestionState();
   showScreen("screen-intro");
 });
