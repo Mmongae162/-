@@ -184,3 +184,66 @@ h1, h2 {
     width: 100%;
   }
 }
+.feedback-card {
+  overflow: hidden;
+  min-height: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#feedback-text {
+  font-size: 42px;
+  margin: 0;
+  z-index: 2;
+}
+
+.feedback-correct {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+}
+
+.feedback-wrong {
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: white;
+}
+
+#confetti-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti {
+  position: absolute;
+  width: 12px;
+  height: 18px;
+  opacity: 0.9;
+  animation: fall 2.2s linear forwards;
+}
+
+.confetti:nth-child(odd) {
+  border-radius: 2px;
+}
+
+.confetti:nth-child(even) {
+  border-radius: 50%;
+}
+
+.dark-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-40px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(320px) rotate(540deg);
+    opacity: 0;
+  }
+}
