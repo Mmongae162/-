@@ -9,6 +9,7 @@ let currentTeacherIndex = 0;
 
 const toStartScreenButton = document.getElementById("to-start-screen");
 const backToIntroButton = document.getElementById("back-to-intro");
+const restartButton = document.getElementById("restart-button");
 const startQuizButton = document.getElementById("start-quiz-button");
 
 const backToStartButton = document.getElementById("back-to-start");
@@ -20,13 +21,25 @@ const gradeButtons = document.querySelectorAll(".grade-button");
 
 const teacherIntroTitle = document.getElementById("teacher-intro-title");
 const questionTeacherName = document.getElementById("question-teacher-name");
-
+const questionScreen = document.getElementById("screen-question");
 function showScreen(screenId) {
   const allScreens = document.querySelectorAll(".screen");
   allScreens.forEach((screen) => {
     screen.classList.remove("active");
   });
+function goToNextTeacher() {
+  currentTeacherIndex++;
 
+  const teacherList = teachersByGrade[selectedGrade];
+
+  if (currentTeacherIndex >= teacherList.length) {
+    showScreen("screen-end");
+    return;
+  }
+
+  updateTeacherIntroScreen();
+  showScreen("screen-teacher-intro");
+}
   document.getElementById(screenId).classList.add("active");
 }
 
@@ -43,7 +56,9 @@ toStartScreenButton.addEventListener("click", () => {
 backToIntroButton.addEventListener("click", () => {
   showScreen("screen-intro");
 });
-
+questionScreen.addEventListener("click", () => {
+  goToNextTeacher();
+});
 startQuizButton.addEventListener("click", () => {
   showScreen("screen-grade");
 });
@@ -71,4 +86,9 @@ toQuestionScreenButton.addEventListener("click", () => {
 
 backToTeacherIntroButton.addEventListener("click", () => {
   showScreen("screen-teacher-intro");
+});
+restartButton.addEventListener("click", () => {
+  selectedGrade = null;
+  currentTeacherIndex = 0;
+  showScreen("screen-intro");
 });
