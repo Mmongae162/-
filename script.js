@@ -53,11 +53,16 @@ const questionTeacherName = document.getElementById("question-teacher-name");
 const scoreText = document.getElementById("score-text");
 const resultMessage = document.getElementById("result-message");
 
+const feedbackCard = document.getElementById("feedback-card");
+const feedbackText = document.getElementById("feedback-text");
+const confettiContainer = document.getElementById("confetti-container");
+
 function showScreen(screenId) {
   const allScreens = document.querySelectorAll(".screen");
   allScreens.forEach((screen) => {
     screen.classList.remove("active");
   });
+
   const nextScreen = document.getElementById(screenId);
   if (nextScreen) {
     nextScreen.classList.add("active");
@@ -154,6 +159,37 @@ function selectAnswer(answerNumber) {
   }
 }
 
+function launchConfetti() {
+  confettiContainer.innerHTML = "";
+
+  for (let i = 0; i < 24; i++) {
+    const piece = document.createElement("div");
+    piece.classList.add("confetti");
+
+    piece.style.left = `${Math.random() * 100}%`;
+    piece.style.background = `hsl(${Math.random() * 360}, 90%, 60%)`;
+    piece.style.animationDelay = `${Math.random() * 0.4}s`;
+
+    confettiContainer.appendChild(piece);
+  }
+}
+
+function showFeedback(isCorrect) {
+  feedbackCard.classList.remove("feedback-correct", "feedback-wrong");
+  confettiContainer.innerHTML = "";
+
+  if (isCorrect) {
+    feedbackCard.classList.add("feedback-correct");
+    feedbackText.textContent = "정답입니다!";
+    launchConfetti();
+  } else {
+    feedbackCard.classList.add("feedback-wrong");
+    feedbackText.textContent = "땡!";
+  }
+
+  showScreen("screen-feedback");
+}
+
 function showResult() {
   const teacherList = teachersByGrade[selectedGrade];
   const total = teacherList.length;
@@ -194,16 +230,16 @@ function checkAnswer() {
 
   const currentTeacher = getCurrentTeacher();
   const correctAnswer = answerKey[currentTeacher];
+  const isCorrect = selectedAnswer === correctAnswer;
 
   checkAnswerButton.disabled = true;
   checkAnswerButton.classList.add("disabled-button");
 
-  if (selectedAnswer === correctAnswer) {
+  if (isCorrect) {
     score += 1;
-    alert("정답입니다!");
-  } else {
-    alert("땡!");
   }
+
+  showFeedback(isCorrect);
 
   setTimeout(() => {
     goToNextTeacher();
