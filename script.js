@@ -1,7 +1,7 @@
 const teachersByGrade = {
   1: ["노승표", "김택현", "고미진", "교장"],
   2: ["최지원", "봉영미", "고미진", "경상현", "교장"],
-  3: ["오지현", "송현정", "고미진", "강경욱", "교장"]
+  3: ["오지현", "송현정", "고미진", "강경옥", "교장"]
 };
 
 const answerKey = {
@@ -14,7 +14,7 @@ const answerKey = {
   "경상현": 1,
   "오지현": 2,
   "송현정": 1,
-  "강경욱": 2
+  "강경옥": 2
 };
 const audioFileMap = {
   "노승표": ["noseungpyoa1.mp3", "noseungpyoa2.mp3"],
@@ -26,7 +26,7 @@ const audioFileMap = {
   "경상현": ["gyeongsanghyeona1.mp3", "gyeongsanghyeona2.mp3"],
   "오지현": ["ohjihyeona1.mp3", "ohjihyeona2.mp3"],
   "송현정": ["songhyeonjeonga1.mp3", "songhyeonjeonga2.mp3"],
-  "강경욱": ["kanggyeonguka1.mp3", "kanggyeonguka2.mp3"]
+  "강경옥": ["kanggyeonguka1.mp3", "kanggyeonguka2.mp3"]
 };
 let selectedGrade = null;
 let currentTeacherIndex = 0;
@@ -302,11 +302,12 @@ function showResult() {
 
   scoreText.textContent = `점수: ${score} / ${total}`;
 
-  if (score >= Math.ceil(total / 2)) {
-    resultMessage.textContent = "🎉 성공! AI 판별 마스터!";
-  } else {
-    resultMessage.textContent = "😢 아쉽네요... 다음 기회에!";
-  }
+  if (score === total) {
+  resultMessage.textContent = "👑 완벽! 인간 vs AI 구분 끝판왕!";
+} else if (score >= Math.ceil(total / 2)) {
+  resultMessage.textContent = "🔥 성공! 꽤 날카로운 귀를 가졌네요!";
+} else {
+  resultMessage.textContent = "😢 아직은 어렵다… 다시 도전!";
 }
 
 function goToNextTeacher() {
