@@ -10,6 +10,7 @@ let currentTeacherIndex = 0;
 const toStartScreenButton = document.getElementById("to-start-screen");
 const backToIntroButton = document.getElementById("back-to-intro");
 const restartButton = document.getElementById("restart-button");
+const nextQuestionButton = document.getElementById("next-question-button");
 const startQuizButton = document.getElementById("start-quiz-button");
 
 const backToStartButton = document.getElementById("back-to-start");
@@ -56,7 +57,7 @@ toStartScreenButton.addEventListener("click", () => {
 backToIntroButton.addEventListener("click", () => {
   showScreen("screen-intro");
 });
-questionScreen.addEventListener("click", () => {
+nextQuestionButton.addEventListener("click", () => {
   goToNextTeacher();
 });
 startQuizButton.addEventListener("click", () => {
