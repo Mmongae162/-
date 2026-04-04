@@ -53,11 +53,9 @@ const questionTeacherName = document.getElementById("question-teacher-name");
 
 function showScreen(screenId) {
   const allScreens = document.querySelectorAll(".screen");
-
   allScreens.forEach((screen) => {
     screen.classList.remove("active");
   });
-
   document.getElementById(screenId).classList.add("active");
 }
 
@@ -111,16 +109,13 @@ function updatePlayButtons() {
 }
 
 function playAudio(number) {
-  if (isCheckingAnswer) {
-    return;
-  }
+  if (isCheckingAnswer) return;
 
   if (number === 1) {
     if (playCount1 >= 2) {
       alert("1번 음성은 재생 한도에 도달했습니다.");
       return;
     }
-
     playCount1 += 1;
     alert("1번 음성 재생 (임시 테스트)");
   }
@@ -130,7 +125,6 @@ function playAudio(number) {
       alert("2번 음성은 재생 한도에 도달했습니다.");
       return;
     }
-
     playCount2 += 1;
     alert("2번 음성 재생 (임시 테스트)");
   }
@@ -139,9 +133,7 @@ function playAudio(number) {
 }
 
 function selectAnswer(answerNumber) {
-  if (isCheckingAnswer) {
-    return;
-  }
+  if (isCheckingAnswer) return;
 
   selectedAnswer = answerNumber;
 
@@ -159,7 +151,6 @@ function selectAnswer(answerNumber) {
 
 function goToNextTeacher() {
   currentTeacherIndex++;
-
   const teacherList = teachersByGrade[selectedGrade];
 
   if (currentTeacherIndex >= teacherList.length) {
@@ -173,9 +164,7 @@ function goToNextTeacher() {
 }
 
 function checkAnswer() {
-  if (isCheckingAnswer) {
-    return;
-  }
+  if (isCheckingAnswer) return;
 
   if (selectedAnswer === null) {
     alert("먼저 답을 선택해 주세요.");
