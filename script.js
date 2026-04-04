@@ -153,10 +153,11 @@ function goToNextTeacher() {
   currentTeacherIndex++;
   const teacherList = teachersByGrade[selectedGrade];
 
-  if (currentTeacherIndex >= teacherList.length) {
-    showScreen("screen-end");
-    return;
-  }
+if (currentTeacherIndex >= teacherList.length) {
+  showResult(); // ← 추가
+  showScreen("screen-end");
+  return;
+}
 
   updateTeacherIntroScreen();
   resetQuestionState();
