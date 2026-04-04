@@ -258,3 +258,18 @@ restartButton.addEventListener("click", () => {
   resetQuestionState();
   showScreen("screen-intro");
 });
+function showResult() {
+  const teacherList = teachersByGrade[selectedGrade];
+  const total = teacherList.length;
+
+  const scoreText = document.getElementById("score-text");
+  const resultMessage = document.getElementById("result-message");
+
+  scoreText.textContent = `점수: ${score} / ${total}`;
+
+  if (score >= Math.ceil(total / 2)) {
+    resultMessage.textContent = "🎉 성공! AI 판별 마스터!";
+  } else {
+    resultMessage.textContent = "😢 아쉽네요... 다음 기회에!";
+  }
+}
