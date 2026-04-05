@@ -27,7 +27,7 @@ const silhouetteImageMap = {
   "경상현": "/-/images/gyeongsanghyeon.png",
   "오지현": "/-/images/ohjihyeon.png",
   "송현정": "/-/images/songhyeonjeong.png",
-  "강경옥": "/-/images/kanggyeonguk.png"
+  "강경욱": "/-/images/kanggyeonguk.png"
 };
 
 const audioFileMap = {
@@ -40,7 +40,7 @@ const audioFileMap = {
   "경상현": ["gyeongsanghyeona1.mp3", "gyeongsanghyeona2.mp3"],
   "오지현": ["ohjihyeona2.mp3", "ohjihyeona1.mp3"],
   "송현정": ["songhyeonjeonga1.mp3", "songhyeonjeonga2.mp3"],
-  "강경옥": ["kanggyeonguka2.mp3", "kanggyeonguka1.mp3"]
+  "강경욱": ["kanggyeonguka2.mp3", "kanggyeonguka1.mp3"]
 };
 
 let selectedGrade = null;
@@ -53,10 +53,18 @@ let selectedAnswer = null;
 let isCheckingAnswer = false;
 let currentAudio1 = null;
 let currentAudio2 = null;
+let bonusCorrect = false;
 
 const toStartScreenButton = document.getElementById("to-start-screen");
 const backToIntroButton = document.getElementById("back-to-intro");
 const startQuizButton = document.getElementById("start-quiz-button");
+
+const finalRestartButton = document.getElementById("final-restart-button");
+const finalScoreText = document.getElementById("final-score-text");
+const finalBonusText = document.getElementById("final-bonus-text");
+const finalFailScore = document.getElementById("final-fail-score");
+const finalSuccessArea = document.getElementById("final-success-area");
+const finalFailArea = document.getElementById("final-fail-area");
 
 const backToStartButton = document.getElementById("back-to-start");
 const backToGradeButton = document.getElementById("back-to-grade");
@@ -78,6 +86,7 @@ const answer1Button = document.getElementById("answer-1-button");
 const answer2Button = document.getElementById("answer-2-button");
 
 const gradeButtons = document.querySelectorAll(".grade-button");
+const bonusOptions = document.querySelectorAll(".bonus-option");
 
 const teacherIntroTitle = document.getElementById("teacher-intro-title");
 const teacherSilhouette = document.getElementById("teacher-silhouette");
@@ -329,6 +338,31 @@ function showFeedback(isCorrect) {
   showScreen("screen-feedback");
 }
 
+function showFinalCertificate() {
+  const teacherList = teachersByGrade[selectedGrade];
+  const total = teacherList.length;
+  const passed = score >= Math.ceil(total / 2);
+
+  finalScoreText.textContent = `기본 퀴즈 점수: ${score} / ${total}`;
+  finalFailScore.textContent = `기본 퀴즈 점수: ${score} / ${total}`;
+
+  if (bonusCorrect) {
+    finalBonusText.textContent = "보너스 문제까지 정답! 윤리 책임감 우수";
+  } else {
+    finalBonusText.textContent = "보너스 문제는 다음에 다시 도전!";
+  }
+
+  if (passed) {
+    finalSuccessArea.style.display = "block";
+    finalFailArea.style.display = "none";
+  } else {
+    finalSuccessArea.style.display = "none";
+    finalFailArea.style.display = "block";
+  }
+
+  showScreen("screen-final");
+}
+
 function showResult() {
   const teacherList = teachersByGrade[selectedGrade];
   const total = teacherList.length;
@@ -399,6 +433,7 @@ startQuizButton.addEventListener("click", () => {
   score = 0;
   scoreText.textContent = "점수: 0 / 0";
   resultMessage.textContent = "";
+  bonusCorrect = false;
   showScreen("screen-grade");
 });
 
@@ -453,40 +488,62 @@ restartButton.addEventListener("click", () => {
   selectedGrade = null;
   currentTeacherIndex = 0;
   score = 0;
+  bonusCorrect = false;
   scoreText.textContent = "점수: 0 / 0";
   resultMessage.textContent = "";
   resetQuestionState();
   showScreen("screen-intro");
 });
-toEthicsScreenButton.addEventListener("click", () => {
-  showScreen("screen-ethics");
-});
 
-toBonusScreenButton.addEventListener("click", () => {
-  showScreen("screen-bonus");
-});
+if (toEthicsScreenButton) {
+  toEthicsScreenButton.addEventListener("click", () => {
+    showScreen("screen-ethics");
+  });
+}
+
+if (toBonusScreenButton) {
+  toBonusScreenButton.addEventListener("click", () => {
+    showScreen("screen-bonus");
+  });
+}
 
 bonusOptions.forEach((btn) => {
   btn.addEventListener("click", () => {
-    bonusOptions.forEach(b => b.classList.remove("selected-answer"));
+    bonusOptions.forEach((b) => b.classList.remove("selected-answer"));
     btn.classList.add("selected-answer");
-    btn.dataset.selected = "true";
   });
 });
 
-checkBonusButton.addEventListener("click", () => {
-  const selected = document.querySelector(".bonus-option.selected-answer");
+if (checkBonusButton) {
+  checkBonusButton.addEventListener("click", () => {
+    const selected = document.querySelector(".bonus-option.selected-answer");
 
-  if (!selected) {
-    alert("선택하세요!");
-    return;
-  }
+    if (!selected) {
+      alert("선택하세요!");
+      return;
+    }
 
-  if (selected.dataset.bonus === "3") {
-    alert("정답!");
-  } else {
-    alert("정답은 3번!");
-  }
+    if (selected.dataset.bonus === "3") {
+      bonusCorrect = true;
+      alert("정답!");
+    } else {
+      bonusCorrect = false;
+      alert("정답은 3번!");
+    }
 
-  showScreen("screen-end");
-});
+    showFinalCertificate();
+  });
+}
+
+if (finalRestartButton) {
+  finalRestartButton.addEventListener("click", () => {
+    selectedGrade = null;
+    currentTeacherIndex = 0;
+    score = 0;
+    bonusCorrect = false;
+    scoreText.textContent = "점수: 0 / 0";
+    resultMessage.textContent = "";
+    resetQuestionState();
+    showScreen("screen-intro");
+  });
+}
