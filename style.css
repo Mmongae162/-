@@ -300,3 +300,182 @@ h1, h2 {
   margin-top: 10px;
   resize: none;
 }
+/* 첫 화면 로고 */
+.logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.club-logo {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 10px;
+  box-shadow: 0 8px 20px rgba(255, 182, 193, 0.35);
+}
+
+/* 전체 배경: 봄 느낌 */
+body {
+  background: linear-gradient(180deg, #ffe4ef 0%, #ffd6e8 35%, #ffeef7 100%);
+  color: #5b3b46;
+}
+
+/* 기본 카드 */
+.card {
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 10px 30px rgba(214, 120, 154, 0.18);
+  backdrop-filter: blur(4px);
+}
+
+/* 첫 화면은 조금 더 또렷하게 */
+#screen-intro .card {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 첫 화면 이후는 벚꽃 축제 느낌 */
+#screen-start .card,
+#screen-grade .card,
+#screen-teacher-intro .card,
+#screen-question .card,
+#screen-feedback .card,
+#screen-end .card,
+#screen-ethics .card,
+#screen-bonus .card,
+#screen-survey .card {
+  border: 2px solid rgba(255, 182, 193, 0.45);
+}
+
+/* 제목 색 */
+h1, h2 {
+  color: #c04c7f;
+}
+
+.description {
+  color: #6a4753;
+}
+
+/* 오른쪽 위 정보 */
+.corner-info {
+  color: #b04f77;
+  font-weight: 600;
+}
+
+/* 버튼 색상 */
+.main-button {
+  background: linear-gradient(135deg, #ff8fb1, #ffb3c7);
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 6px 14px rgba(255, 143, 177, 0.28);
+}
+
+.main-button:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.sub-button {
+  background: #fff0f5;
+  color: #b04f77;
+  border: 1px solid rgba(255, 143, 177, 0.35);
+}
+
+.sub-button:hover {
+  transform: translateY(-2px);
+}
+
+/* 학년 버튼 세로 그룹 간격 */
+.vertical-group .main-button {
+  min-width: 180px;
+}
+
+/* 실루엣 영역도 화사하게 */
+.silhouette-placeholder {
+  background: linear-gradient(180deg, rgba(255, 232, 240, 0.95), rgba(255, 245, 248, 0.95));
+  border: 2px solid rgba(255, 182, 193, 0.35);
+}
+
+/* 음성 박스 */
+.play-box {
+  background: rgba(255, 245, 248, 0.95);
+  border: 1px solid rgba(255, 182, 193, 0.35);
+  box-shadow: 0 6px 16px rgba(214, 120, 154, 0.12);
+}
+
+.play-count {
+  color: #b04f77;
+  font-weight: 600;
+}
+
+/* 설문 스타일 조금 더 예쁘게 */
+#screen-survey h2 {
+  font-size: 30px;
+}
+
+#screen-survey p {
+  font-size: 18px;
+  color: #6a4753;
+}
+
+#screen-survey select,
+#survey-comment {
+  background: #fff9fb;
+  color: #5b3b46;
+  border: 1px solid rgba(255, 182, 193, 0.5);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* 선택된 답 강조 */
+.selected-answer {
+  outline: 3px solid #ff8fb1;
+  transform: translateY(-2px);
+}
+
+/* 비활성 버튼 */
+.disabled-button {
+  background: #d8c4cc !important;
+  color: white !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* 결과 화면 강조 */
+#screen-end .card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,244,248,0.95));
+}
+
+/* 윤리/보너스/설문도 봄 행사 느낌 */
+#screen-ethics .card,
+#screen-bonus .card,
+#screen-survey .card {
+  background: rgba(255, 250, 252, 0.92);
+}
+
+/* 간단한 벚꽃 느낌 배경 장식 */
+body::before,
+body::after {
+  content: "🌸";
+  position: fixed;
+  font-size: 32px;
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::before {
+  top: 70px;
+  left: 24px;
+}
+
+body::after {
+  top: 120px;
+  right: 28px;
+}
+
+/* 카드가 장식보다 위에 보이게 */
+#app,
+.card {
+  position: relative;
+  z-index: 1;
+}
