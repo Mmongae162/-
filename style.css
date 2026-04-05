@@ -280,3 +280,14 @@ h1, h2 {
   object-fit: cover;
   border-radius: 20px;
 }
+#screen-survey h2 {
+  font-size: 28px;
+}
+
+#screen-survey p {
+  font-size: 18px;
+}
+
+#screen-survey select {
+  font-size: 16px;
+}
