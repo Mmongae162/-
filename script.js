@@ -18,16 +18,16 @@ const answerKey = {
 };
 
 const silhouetteImageMap = {
-  "노승표": "images/noseungpyo.png",
-  "김택현": "images/kimtaekhyeon.png",
-  "고미진": "images/gomijin.png",
-  "교장": "images/principal.png",
-  "최지원": "images/choijiwon.png",
-  "봉영미": "images/bongyoungmi.png",
-  "경상현": "images/gyeongsanghyeon.png",
-  "오지현": "images/ohjihyeon.png",
-  "송현정": "images/songhyeonjeong.png",
-  "강경욱": "images/kanggyeonguk.png"
+  "노승표": "/-/images/noseungpyo.png",
+  "김택현": "/-/images/kimtaekhyeon.png",
+  "고미진": "/-/images/gomijin.png",
+  "교장": "/-/images/principal.png",
+  "최지원": "/-/images/choijiwon.png",
+  "봉영미": "/-/images/bongyoungmi.png",
+  "경상현": "/-/images/gyeongsanghyeon.png",
+  "오지현": "/-/images/ohjihyeon.png",
+  "송현정": "/-/images/songhyeonjeong.png",
+  "강경욱": "/-/images/kanggyeonguk.png"
 };
 
 const audioFileMap = {
