@@ -60,66 +60,74 @@
         </div>
       </div>
     </section>
-<!-- 윤리 화면 -->
-<section id="screen-ethics" class="screen">
-  <div class="card">
-    <h2>AI 음성 사용 주의</h2>
-    <p class="description">
-      AI 음성 기술은 재미있지만, 허락 없이 다른 사람의 목소리를 사용하면 큰 피해를 줄 수 있습니다.
-      반드시 동의를 받고 책임 있게 사용해야 합니다.
-    </p>
-    <button id="to-bonus-screen" class="main-button">다음</button>
-  </div>
-</section>
 
-<!-- 보너스 문제 -->
-<section id="screen-bonus" class="screen">
-  <div class="card">
-    <h2>보너스 문제</h2>
-    <p>AI 음성을 올바르게 사용하는 방법은?</p>
+    <!-- 윤리 화면 -->
+    <section id="screen-ethics" class="screen">
+      <div class="card">
+        <h2>AI 음성 사용 주의</h2>
+        <p class="description">
+          AI 음성 기술은 재미있지만, 허락 없이 다른 사람의 목소리를 사용하면 큰 피해를 줄 수 있습니다.
+          반드시 동의를 받고 책임 있게 사용해야 합니다.
+        </p>
+        <button id="to-bonus-screen" class="main-button">다음</button>
+      </div>
+    </section>
 
-    <button class="bonus-option sub-button" data-bonus="1">허락 없이 사용</button>
-    <button class="bonus-option sub-button" data-bonus="2">사람 속이기</button>
-    <button class="bonus-option sub-button" data-bonus="3">동의 받고 사용</button>
-    <button class="bonus-option sub-button" data-bonus="4">아무렇게나 사용</button>
+    <!-- 보너스 문제 -->
+    <section id="screen-bonus" class="screen">
+      <div class="card">
+        <h2>보너스 문제</h2>
+        <p class="description">AI 음성을 올바르게 사용하는 방법은?</p>
 
-    <button id="check-bonus-button" class="main-button">정답 확인</button>
-  </div>
-</section>
+        <div class="button-group vertical-group">
+          <button class="bonus-option sub-button" data-bonus="1">허락 없이 사용</button>
+          <button class="bonus-option sub-button" data-bonus="2">사람 속이기</button>
+          <button class="bonus-option sub-button" data-bonus="3">동의 받고 사용</button>
+          <button class="bonus-option sub-button" data-bonus="4">아무렇게나 사용</button>
+        </div>
 
-<!-- 설문 -->
-<section id="screen-survey" class="screen">
-  <div class="card">
-    <h2>설문조사</h2>
+        <div class="button-group" style="margin-top: 20px;">
+          <button id="check-bonus-button" class="main-button">정답 확인</button>
+        </div>
+      </div>
+    </section>
 
-    <p>재미있었나요?</p>
-    <select id="survey-q1">
-      <option value="">선택</option>
-      <option>재미있었다</option>
-      <option>보통</option>
-      <option>재미없었다</option>
-    </select>
+    <!-- 설문 -->
+    <section id="screen-survey" class="screen">
+      <div class="card">
+        <h2>설문조사</h2>
 
-    <p>도움이 되었나요?</p>
-    <select id="survey-q2">
-      <option value="">선택</option>
-      <option>도움됨</option>
-      <option>보통</option>
-      <option>도움 안됨</option>
-      <p style="margin-top:20px;">좋았던 점이나 개선할 점을 자유롭게 적어주세요</p>
+        <p>재미있었나요?</p>
+        <select id="survey-q1">
+          <option value="">선택</option>
+          <option>재미있었다</option>
+          <option>보통</option>
+          <option>재미없었다</option>
+        </select>
 
-<textarea id="survey-comment" rows="4" placeholder="자유롭게 의견을 작성해 주세요"></textarea>
-    </select>
+        <p style="margin-top: 20px;">도움이 되었나요?</p>
+        <select id="survey-q2">
+          <option value="">선택</option>
+          <option>도움됨</option>
+          <option>보통</option>
+          <option>도움 안됨</option>
+        </select>
 
-    <button id="submit-survey-button" class="main-button">제출</button>
-  </div>
-</section>
+        <p style="margin-top: 20px;">좋았던 점이나 개선할 점을 자유롭게 적어주세요</p>
+        <textarea id="survey-comment" rows="4" placeholder="자유롭게 의견을 작성해 주세요"></textarea>
+
+        <div class="button-group" style="margin-top: 20px;">
+          <button id="submit-survey-button" class="main-button">제출</button>
+        </div>
+      </div>
+    </section>
+
     <!-- 선생님 소개 화면 -->
     <section id="screen-teacher-intro" class="screen">
       <div class="card">
         <div class="silhouette-placeholder">
-  <img id="teacher-silhouette" class="silhouette-img" src="/-/images/noseungpyo.png">
-</div>
+          <img id="teacher-silhouette" class="silhouette-img" src="/-/images/noseungpyo.png" alt="선생님 실루엣" />
+        </div>
 
         <h2 id="teacher-intro-title">
           이번 히든 싱어의 주인공은 OOO 선생님입니다.
@@ -187,9 +195,10 @@
         <h3 id="result-message"></h3>
 
         <div class="button-group">
-  <button id="to-ethics-screen" class="main-button">다음</button>
-  <button id="restart-button" class="sub-button">처음으로</button>
-</div>
+          <button id="to-ethics-screen" class="main-button">다음</button>
+          <button id="restart-button" class="sub-button">처음으로</button>
+        </div>
+      </div>
     </section>
 
   </div>
