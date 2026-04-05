@@ -67,12 +67,6 @@ const restartButton = document.getElementById("restart-button");
 const toEthicsScreenButton = document.getElementById("to-ethics-screen");
 const toBonusScreenButton = document.getElementById("to-bonus-screen");
 const checkBonusButton = document.getElementById("check-bonus-button");
-const submitSurveyButton = document.getElementById("submit-survey-button");
-
-const bonusOptions = document.querySelectorAll(".bonus-option");
-const surveyQ1 = document.getElementById("survey-q1");
-const surveyQ2 = document.getElementById("survey-q2");
-const surveyComment = document.getElementById("survey-comment");
 const checkAnswerButton = document.getElementById("check-answer-button");
 
 const playAudio1Button = document.getElementById("play-audio-1");
@@ -494,20 +488,5 @@ checkBonusButton.addEventListener("click", () => {
     alert("정답은 3번!");
   }
 
-  showScreen("screen-survey");
-});
-
-submitSurveyButton.addEventListener("click", () => {
-  if (!surveyQ1.value || !surveyQ2.value) {
-    alert("다 선택해줘!");
-    return;
-  }
-
-  console.log("설문 결과:", {
-    흥미도: surveyQ1.value,
-    도움도: surveyQ2.value,
-    의견: surveyComment.value
-  });
-
-  alert("설문이 제출되었습니다!");
+  showScreen("screen-end");
 });
