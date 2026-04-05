@@ -511,10 +511,3 @@ submitSurveyButton.addEventListener("click", () => {
 
   alert("설문이 제출되었습니다!");
 });
-  if (!surveyQ1.value || !surveyQ2.value) {
-    alert("다 선택해줘!");
-    return;
-  }
-
-  alert("완료!");
-});
