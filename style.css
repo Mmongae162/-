@@ -291,3 +291,12 @@ h1, h2 {
 #screen-survey select {
   font-size: 16px;
 }
+#survey-comment {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  margin-top: 10px;
+  resize: none;
+}
