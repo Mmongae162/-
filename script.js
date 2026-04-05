@@ -536,14 +536,17 @@ if (checkBonusButton) {
 }
 
 if (finalRestartButton) {
-  finalRestartButton.addEventListener("click", () => {
+  finalRestartButton.onclick = () => {
     selectedGrade = null;
     currentTeacherIndex = 0;
     score = 0;
     bonusCorrect = false;
+    selectedAnswer = null;
+    isCheckingAnswer = false;
+
     scoreText.textContent = "점수: 0 / 0";
     resultMessage.textContent = "";
     resetQuestionState();
     showScreen("screen-intro");
-  });
+  };
 }
