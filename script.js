@@ -27,20 +27,20 @@ const silhouetteImageMap = {
   "경상현": "/-/images/gyeongsanghyeon.png",
   "오지현": "/-/images/ohjihyeon.png",
   "송현정": "/-/images/songhyeonjeong.png",
-  "강경욱": "/-/images/kanggyeonguk.png"
+  "강경옥": "/-/images/kanggyeonguk.png"
 };
 
 const audioFileMap = {
   "노승표": ["noseungpyoa1.mp3", "noseungpyoa2.mp3"],
   "김택현": ["", ""],
   "고미진": ["gomijina1.mp3", "gomijina2.mp3"],
-  "교장": ["principala1.mp3", "principala2.mp3"],
+  "교장": ["principala2.mp3", "principala1.mp3"],
   "최지원": ["choijiwona1.mp3", "choijiwona2.mp3"],
-  "봉영미": ["bongyoungmia1.mp3", "bongyoungmia2.mp3"],
+  "봉영미": ["bongyoungmia2.mp3", "bongyoungmia1.mp3"],
   "경상현": ["gyeongsanghyeona1.mp3", "gyeongsanghyeona2.mp3"],
-  "오지현": ["ohjihyeona1.mp3", "ohjihyeona2.mp3"],
+  "오지현": ["ohjihyeona2.mp3", "ohjihyeona1.mp3"],
   "송현정": ["songhyeonjeonga1.mp3", "songhyeonjeonga2.mp3"],
-  "강경욱": ["kanggyeonguka1.mp3", "kanggyeonguka2.mp3"]
+  "강경옥": ["kanggyeonguka2.mp3", "kanggyeonguka1.mp3"]
 };
 
 let selectedGrade = null;
