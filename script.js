@@ -64,6 +64,14 @@ const toQuestionScreenButton = document.getElementById("to-question-screen");
 const backToTeacherIntroButton = document.getElementById("back-to-teacher-intro");
 
 const restartButton = document.getElementById("restart-button");
+const toEthicsScreenButton = document.getElementById("to-ethics-screen");
+const toBonusScreenButton = document.getElementById("to-bonus-screen");
+const checkBonusButton = document.getElementById("check-bonus-button");
+const submitSurveyButton = document.getElementById("submit-survey-button");
+
+const bonusOptions = document.querySelectorAll(".bonus-option");
+const surveyQ1 = document.getElementById("survey-q1");
+const surveyQ2 = document.getElementById("survey-q2");
 const checkAnswerButton = document.getElementById("check-answer-button");
 
 const playAudio1Button = document.getElementById("play-audio-1");
@@ -454,4 +462,45 @@ restartButton.addEventListener("click", () => {
   resultMessage.textContent = "";
   resetQuestionState();
   showScreen("screen-intro");
+});
+toEthicsScreenButton.addEventListener("click", () => {
+  showScreen("screen-ethics");
+});
+
+toBonusScreenButton.addEventListener("click", () => {
+  showScreen("screen-bonus");
+});
+
+bonusOptions.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    bonusOptions.forEach(b => b.classList.remove("selected-answer"));
+    btn.classList.add("selected-answer");
+    btn.dataset.selected = "true";
+  });
+});
+
+checkBonusButton.addEventListener("click", () => {
+  const selected = document.querySelector(".bonus-option.selected-answer");
+
+  if (!selected) {
+    alert("선택하세요!");
+    return;
+  }
+
+  if (selected.dataset.bonus === "3") {
+    alert("정답!");
+  } else {
+    alert("정답은 3번!");
+  }
+
+  showScreen("screen-survey");
+});
+
+submitSurveyButton.addEventListener("click", () => {
+  if (!surveyQ1.value || !surveyQ2.value) {
+    alert("다 선택해줘!");
+    return;
+  }
+
+  alert("완료!");
 });
