@@ -77,6 +77,9 @@ const toBonusScreenButton = document.getElementById("to-bonus-screen");
 const checkBonusButton = document.getElementById("check-bonus-button");
 const checkAnswerButton = document.getElementById("check-answer-button");
 
+const failScoreText = document.getElementById("fail-score-text");
+const failRestartButton = document.getElementById("fail-restart-button");
+
 const playAudio1Button = document.getElementById("play-audio-1");
 const playAudio2Button = document.getElementById("play-audio-2");
 const playCount1Text = document.getElementById("play-count-1");
@@ -343,24 +346,20 @@ function showFinalCertificate() {
   const total = teacherList.length;
   const passed = score >= Math.ceil(total / 2);
 
-  finalScoreText.textContent = `기본 퀴즈 점수: ${score} / ${total}`;
-  finalFailScore.textContent = `기본 퀴즈 점수: ${score} / ${total}`;
-
-  if (bonusCorrect) {
-    finalBonusText.textContent = "보너스 문제까지 정답! 윤리 책임감 우수";
-  } else {
-    finalBonusText.textContent = "보너스 문제는 다음에 다시 도전!";
-  }
-
   if (passed) {
-    finalSuccessArea.style.display = "block";
-    finalFailArea.style.display = "none";
-  } else {
-    finalSuccessArea.style.display = "none";
-    finalFailArea.style.display = "block";
-  }
+    finalScoreText.textContent = `기본 퀴즈 점수: ${score} / ${total}`;
 
-  showScreen("screen-final");
+    if (bonusCorrect) {
+      finalBonusText.textContent = "보너스 문제까지 정답! 윤리 책임감 우수";
+    } else {
+      finalBonusText.textContent = "보너스 문제는 다음에 다시 도전!";
+    }
+
+    showScreen("screen-final");
+  } else {
+    failScoreText.textContent = `기본 퀴즈 점수: ${score} / ${total}`;
+    showScreen("screen-fail");
+  }
 }
 
 function showResult() {
@@ -549,4 +548,17 @@ if (finalRestartButton) {
     resetQuestionState();
     showScreen("screen-intro");
   };
+}
+
+if (failRestartButton) {
+  failRestartButton.addEventListener("click", () => {
+    selectedGrade = null;
+    currentTeacherIndex = 0;
+    score = 0;
+    bonusCorrect = false;
+    scoreText.textContent = "점수: 0 / 0";
+    resultMessage.textContent = "";
+    resetQuestionState();
+    showScreen("screen-intro");
+  });
 }
