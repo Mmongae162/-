@@ -32,7 +32,7 @@ const silhouetteImageMap = {
 
 const audioFileMap = {
   "노승표": ["noseungpyoa1.mp3", "noseungpyoa2.mp3"],
-  "김택현": ["", ""],
+  "김택현": ["kimtaekhyeona2.mp3", "kimtaekhyeona1.mp3"],
   "고미진": ["gomijina1.mp3", "gomijina2.mp3"],
   "교장": ["principala2.mp3", "principala1.mp3"],
   "최지원": ["choijiwona1.mp3", "choijiwona2.mp3"],
